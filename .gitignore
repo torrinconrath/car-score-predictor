@@ -1,0 +1,24 @@
+# Ignore specific config file
+env/config.py
+
+# Ignore __pycache__ in env/ and car_score_api/
+env/**/__pycache__/
+car_score_api/**/__pycache__/
+
+# Ignore all Python cache files (if necessary)
+__pycache__/
+*.py[cod]
+
+# Ignore all .pkl and .pth files in car_score_api/
+car_score_api/**/*.pkl
+car_score_api/**/*.pth
+
+# Ignore model_features.json specifically
+car_score_api/model_features.json
+
+# Ignore all .pkl and .pth files in car_score_api/
+model/**/*.pkl
+model/**/*.pth
+
+# Ignore model_features.json specifically
+model/model_features.json
