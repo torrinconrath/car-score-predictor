@@ -237,7 +237,7 @@ def save_to_mysql(df, cursor, conn, table_name='Cars'):
     df['value'] = values
 
     columns = [
-        "title", "make", "model", "modelTitle", "condition", "year", "mileage", 
+        "title", "make", "model", "modelTitle", "`condition`", "year", "mileage", 
         "price", "monthlyPayment", "dealer", "value", "region", "state", "link", "time"
     ]
     cols_str = ",".join(columns)
