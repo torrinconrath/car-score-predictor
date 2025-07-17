@@ -35,6 +35,9 @@ def get_cars():
         min_price = int(request.args.get('min_price', 2000))
         max_price = int(request.args.get('max_price', 100000)) 
 
+        min_mileage = int(request.args.get('min_mileage', 0)) 
+        max_mileage = int(request.args.get('max_mileage', 250000)) 
+
         # Filters 
         makes = request.args.getlist('make')
         models = request.args.getlist('model')
@@ -43,12 +46,20 @@ def get_cars():
         conn = db_connection()
         with conn.cursor() as cursor:
 
-            # Base query
+            # Base query with price and mileage filter
             base_query = """
                 FROM Cars
-                WHERE CAST(REPLACE(REPLACE(price, '$', ''), ',', '') AS UNSIGNED) BETWEEN %s AND %s
+                WHERE 
+                CAST(REPLACE(REPLACE(price, '$', ''), ',', '') AS UNSIGNED) BETWEEN %s AND %s
+                AND
+                CAST(
+                    REPLACE(
+                    REPLACE(mileage, ',', ''), -- remove commas
+                    ' mi.', ''                 -- remove " mi."
+                    ) AS UNSIGNED
+                ) BETWEEN %s AND %s
             """
-            values = [min_price, max_price]
+            values = [min_price, max_price, min_mileage, max_mileage]
 
             # Add filtering conditions
             if makes:

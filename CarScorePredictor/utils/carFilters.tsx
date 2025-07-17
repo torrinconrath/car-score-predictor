@@ -13,11 +13,13 @@ interface FilterProps {
   selectedModels: string[];
   selectedStates: string[];
   priceRange: number[];
+  mileageRange: number[];
   onChange: (filters: {
     makes: string[];
     models: string[];
     states: string[];
     priceRange: number[];
+    mileageRange: number[];
   }) => void;
 }
 
@@ -29,10 +31,12 @@ const CarFilters: React.FC<FilterProps> = ({
   selectedModels,
   selectedStates,
   priceRange,
+  mileageRange,
   onChange
 }) => {
   const [showAllFilters, setShowAllFilters] = useState(false);
   const [showPriceFilter, setShowPriceFilter] = useState(false);
+  const [showMileageFilter, setShowMileageFilter] = useState(false);
   const [showMakeModelFilter, setShowMakeModelFilter] = useState(false);
   const [showStateFilter, setShowStateFilter] = useState(false);
 
@@ -50,13 +54,16 @@ const CarFilters: React.FC<FilterProps> = ({
         models: updatedModels,
         states: selectedStates,
         priceRange: priceRange,
+        mileageRange: mileageRange,
+
       });
     } else {
       onChange({
         makes: type === 'makes' ? updated : selectedMakes,
         models: type === 'models' ? updated : selectedModels,
         states: type === 'states' ? updated : selectedStates,
-        priceRange: priceRange
+        priceRange: priceRange,
+        mileageRange: mileageRange
       });
     }
   };
@@ -66,7 +73,8 @@ const CarFilters: React.FC<FilterProps> = ({
       makes: selectedMakes,
       models: selectedModels,
       states: selectedStates,
-      priceRange: values
+      priceRange: values,
+      mileageRange: mileageRange,
     });
   };
 
@@ -81,6 +89,29 @@ const CarFilters: React.FC<FilterProps> = ({
       handlePriceChange([min, max]);
     }
     setEditingPrice(false);
+  };
+
+  const handleMileageChange = (values: number[]) => {
+    onChange({
+      makes: selectedMakes,
+      models: selectedModels,
+      states: selectedStates,
+      priceRange: priceRange,
+      mileageRange: values,
+    });
+  };
+
+  const [editingMileage, setEditingMileage] = useState(false);
+  const [tempMinMileage, setTempMinMileage] = useState(mileageRange[0].toString());
+  const [tempMaxMileage, setTempMaxMileage] = useState(mileageRange[1].toString());
+
+  const applyMileageInput = () => {
+    const min = parseInt(tempMinMileage);
+    const max = parseInt(tempMaxMileage);
+    if (!isNaN(min) && !isNaN(max) && min <= max) {
+      handleMileageChange([min, max]);
+    }
+    setEditingMileage(false);
   };
 
   const [innerScrollAtEnd, setInnerScrollAtEnd] = useState(false);
@@ -111,7 +142,7 @@ const CarFilters: React.FC<FilterProps> = ({
               <TouchableOpacity onPress={() => setEditingPrice(true)}>
                 {!editingPrice ? (
                   <ThemedText type="defaultSemiBold">
-                    {`Price Range: $${priceRange[0].toLocaleString()} - $${priceRange[1].toLocaleString()}`}
+                    {`Range: $${priceRange[0].toLocaleString()} - $${priceRange[1].toLocaleString()}`}
                   </ThemedText>
                 ) : (
                   <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
@@ -142,6 +173,59 @@ const CarFilters: React.FC<FilterProps> = ({
                 max={100000}
                 step={500}
                 onValuesChangeFinish={handlePriceChange}
+                sliderLength={Dimensions.get('window').width - 100}
+                selectedStyle={{ backgroundColor: '#0066cc' }}
+                unselectedStyle={{ backgroundColor: '#ccc' }}
+                markerStyle={{
+                  backgroundColor: 'white',
+                  borderColor: '#0066cc',
+                  borderWidth: 2,
+                }}
+                containerStyle={{ alignSelf: 'center' }}
+              />
+            </View>
+          )}
+
+          {/* Mileage Filter */}
+          <TouchableOpacity onPress={() => setShowMileageFilter(!showMileageFilter)} style={styles.dropdownHeader}>
+            <ThemedText type="defaultSemiBold">Filter by Mileage</ThemedText>
+          </TouchableOpacity>
+          {showMileageFilter && (
+            <View style={styles.sliderContainer}>
+              <TouchableOpacity onPress={() => setEditingMileage(true)}>
+                {!editingMileage ? (
+                  <ThemedText type="defaultSemiBold">
+                    {`Range: ${mileageRange[0].toLocaleString()} mi. - ${mileageRange[1].toLocaleString()} mi.`}
+                  </ThemedText>
+                ) : (
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                    <TextInput
+                      value={tempMinMileage}
+                      onChangeText={setTempMinMileage}
+                      keyboardType="numeric"
+                      placeholder="Min"
+                      style={styles.input}
+                    />
+                    <Text style={{ color: 'white' }}>to</Text>
+                    <TextInput
+                      value={tempMaxMileage}
+                      onChangeText={setTempMaxMileage}
+                      keyboardType="numeric"
+                      placeholder="Max"
+                      style={styles.input}
+                    />
+                    <TouchableOpacity onPress={applyMileageInput} style={styles.applyButton}>
+                      <Text style={styles.applyButtonText}>Apply</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              </TouchableOpacity>
+              <MultiSlider
+                values={mileageRange}
+                min={0}
+                max={250000}
+                step={1000}
+                onValuesChangeFinish={handleMileageChange}
                 sliderLength={Dimensions.get('window').width - 100}
                 selectedStyle={{ backgroundColor: '#0066cc' }}
                 unselectedStyle={{ backgroundColor: '#ccc' }}

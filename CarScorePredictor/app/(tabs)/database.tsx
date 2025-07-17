@@ -38,6 +38,8 @@ export default function DataScreen() {
   const [totalPages, setTotalPages] = useState(0);
   const [priceRange, setPriceRange] = useState([2000, 100000]);
   const [minPrice, maxPrice] = priceRange;
+  const [mileageRange, setMileageRange] = useState([0, 250000]);
+  const [minMileage, maxMileage] = mileageRange;
   const [allMakes, setAllMakes] = useState<string[]>([]);
   const [allModels, setAllModels] = useState<{ [make: string]: string[] }>({});
   const [allStates, setAllStates] = useState<string[]>([]);
@@ -53,7 +55,7 @@ export default function DataScreen() {
         const modelParams = selectedModels.map(m => `model=${encodeURIComponent(m)}`).join('&');
         const stateParams = selectedStates.map(s => `state=${encodeURIComponent(s)}`).join('&');
 
-        const response = await fetch(`http://${config.ip}:${config.port}/cars?page=${page}&per_page=${perPage}&min_price=${minPrice}&max_price=${maxPrice}&${makeParams}&${modelParams}&${stateParams}`);
+        const response = await fetch(`http://${config.ip}:${config.port}/cars?page=${page}&per_page=${perPage}&min_price=${minPrice}&max_price=${maxPrice}&min_mileage=${minMileage}&max_mileage=${maxMileage}&${makeParams}&${modelParams}&${stateParams}`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -74,7 +76,7 @@ export default function DataScreen() {
     };
 
     fetchCars();
-  }, [page, perPage, priceRange, selectedMakes, selectedModels, selectedStates]);
+  }, [page, perPage, priceRange, mileageRange, selectedMakes, selectedModels, selectedStates]);
 
 
   useEffect(() => {
@@ -259,11 +261,13 @@ const renderPagination = () => (
         selectedModels={selectedModels}
         selectedStates={selectedStates}
         priceRange={priceRange}
-        onChange={({ makes, models, states, priceRange }) => {
+        mileageRange={mileageRange}
+        onChange={({ makes, models, states, priceRange, mileageRange }) => {
           setSelectedMakes(makes);
           setSelectedModels(models);
           setSelectedStates(states);
           setPriceRange(priceRange);
+          setMileageRange(mileageRange);
           setPage(1); // Reset pagination on filter change
         }}
       />
