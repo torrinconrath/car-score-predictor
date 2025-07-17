@@ -1,10 +1,12 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
+import {StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { Linking } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 export default function HomeScreen() {
   return (
@@ -12,43 +14,51 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
+          source={require('@/assets/images/car2.png')}
           style={styles.reactLogo}
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
+        <ThemedText type="title">Welcome to the Car Score Predictor</ThemedText>
       </ThemedView>
+
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
+        <ThemedText type="subtitle">Predict Tab</ThemedText>
         <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
+          The Predict Tab holds a text input LLM to output a inputted car's value. {"\n"}
+          For the best performance include at least the year, model, mileage, and price to get an accurate score. {"\n"}
+          The model handles Year, Model, Mileage, Price, Condition, Dealer, Monthly Payment, Accident History, Number of Owners, and Personal/Commericial Use directly. {"\n"}
+        </ThemedText>
+      </ThemedView>
+
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Database Tab</ThemedText>
+        <ThemedText>
+          The Database Tab holds a record of cars gathered by a webscraper to display. {"\n"}
+          Used cars with perfect history means they have a clean history, one owner, and no accidents.  {"\n"}
+          This can give a sense of deals out their and potentially good deals. {"\n"}
+          You can filter by price limits, makes and models, and US states. {"\n"}
+          Lastly, the cars are automatically sorted by their projected value as the purpose of this app is to find and identify deals. {"\n"}
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
+        <ThemedText type="subtitle">The Future</ThemedText>
         <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
+          Currently, I cannot deploy this application or utilize better methodologies like Google Maps API, as using web scrapers causes moral issues and potential API request charges. 
+          I had to abandon trying to extract the model style, accident and usage history, or owners, due to needing to scrape the individual listing which often didn't contain the needed information.  
+          Additionally, I didn't have access to a free, robust deployment service to publish this application to the world.  
+           {"\n\n"}
+           Lastly, the car value score algorithm doesn't perform ideally due to the limitations of not knowing maintence costs or mileage expectancies over models and other information voided from the listings or the user. 
+           The neural network also tends to play it safe on the scores, making a lot of cars hover around the same score giving it an overall worse accuracy that what I wanted given a 1 point tolerance.
+           {"\n\n"}
+           If you have any questions or ways I can fix my concerns email me: 
         </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+        <ThemedText
+          type="default"
+          style={{ color: 'white'}}
+          onPress={() => Linking.openURL('mailto:support@example.com')}
+        >
+          torrinconrath@gmail.com
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
@@ -66,8 +76,9 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   reactLogo: {
-    height: 178,
-    width: 290,
+    height: height * 0.3,
+    width: width,
+    resizeMode: 'cover',
     bottom: 0,
     left: 0,
     position: 'absolute',

@@ -1,14 +1,14 @@
 import { StyleSheet, FlatList, ActivityIndicator, TouchableOpacity, Linking, View } from 'react-native';
+import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { moderateScale, verticalScale } from 'react-native-size-matters';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import AntDesign from '@expo/vector-icons/AntDesign';
-
-import { getScoreRating } from "../utils/scoreRating";
-import { fetchConfig } from "../utils/fetchConfig";
-import CarFilters from '../utils/carFilters';
+import { Dimensions } from 'react-native';
+import { getScoreRating } from "../../utils/scoreRating";
+import { fetchConfig } from "../../utils/fetchConfig";
+import CarFilters from '../../utils/carFilters';
 
 interface Car {
   value: any;
@@ -26,6 +26,8 @@ interface Car {
   link: string;
 }
 
+const { width, height } = Dimensions.get('window');
+
 export default function DataScreen() {
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
@@ -42,7 +44,6 @@ export default function DataScreen() {
   const [selectedMakes, setSelectedMakes] = useState<string[]>([]);
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   const [selectedStates, setSelectedStates] = useState<string[]>([]);
-
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -166,7 +167,14 @@ export default function DataScreen() {
     {item.value && (
       <ThemedView style={styles.detailsRow}>
         <ThemedText type="defaultSemiBold" style={{ fontSize: 14 }}>Value: </ThemedText>
-        <ThemedText type="default" style={{ fontSize: 14, flex: 1, textAlign: 'right', color: getScoreRating(item.value).color }} adjustsFontSizeToFit numberOfLines={2} minimumFontScale={0.75}>{getScoreRating(item.value).rating} ({item.value})</ThemedText>
+        <ThemedText 
+          type="default" 
+          style={{ fontSize: 14, flex: 1, textAlign: 'right', color: getScoreRating(item.value).color }} 
+          adjustsFontSizeToFit 
+          numberOfLines={2} 
+          minimumFontScale={0.75}
+        >
+          {`${getScoreRating(item.value).rating} (${item.value})`}</ThemedText>
       </ThemedView>
     )}
     
@@ -231,13 +239,11 @@ const renderPagination = () => (
 
     return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
-        <AntDesign
-          size={410}
-          color="#808080"
-          name="car"
-          style={styles.headerImage}
+        <Image
+          source={require('@/assets/images/car2.png')}
+          style={styles.reactLogo}
         />
       }>
       <ThemedView style={styles.titleContainer}>
@@ -292,15 +298,17 @@ const renderPagination = () => (
           <ThemedText type="default">No cars available</ThemedText>
         </ThemedView>
       )}
-    </ParallaxScrollView> /**'#292828' */
+    </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
+  reactLogo: {
+    height: height * 0.3,
+    width: width,
+    resizeMode: 'cover',
+    bottom: 0,
+    left: 0,
     position: 'absolute',
   },
   titleContainer: {

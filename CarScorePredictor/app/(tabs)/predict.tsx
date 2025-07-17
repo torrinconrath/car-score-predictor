@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { Platform, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { Image } from 'expo-image';
+import { Dimensions } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { getScoreRating } from "../utils/scoreRating";
-import { fetchConfig } from "../utils/fetchConfig";
+import { getScoreRating } from "../../utils/scoreRating";
+import { fetchConfig } from "../../utils/fetchConfig";
+
+const { width, height } = Dimensions.get('window');
 
 export default function TabTwoScreen() {
 
@@ -61,13 +64,11 @@ export default function TabTwoScreen() {
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
-        <AntDesign
-          size={410}
-          color="#808080"
-          name="questioncircleo"
-          style={styles.headerImage}
+        <Image
+          source={require('@/assets/images/car2.png')}
+          style={styles.reactLogo}
         />
       }>
       <ThemedView style={styles.titleContainer}>
@@ -129,10 +130,12 @@ export default function TabTwoScreen() {
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
+  reactLogo: {
+    height: height * 0.3,
+    width: width,
+    resizeMode: 'cover',
+    bottom: 0,
+    left: 0,
     position: 'absolute',
   },
   titleContainer: {

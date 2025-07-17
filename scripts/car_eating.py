@@ -184,7 +184,7 @@ def add_predicted_values(df):
 
     for _, row in df.iterrows():
         try:
-            description = f"{row['year']} {row['model']} {row['condition']}, {row['mileage']} miles, {row['price']}"
+            description = f"{row['year']} {row['modelTitle']} {row['condition']}, {row['mileage']} miles, {row['price']}"
             response = requests.post(f"http://{config['ip']}:{config['port']}/predict", json={"description": description})
             result = response.json()
             score = float(result.get('score', 0.0))
