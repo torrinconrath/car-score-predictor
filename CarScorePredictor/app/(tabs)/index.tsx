@@ -38,14 +38,14 @@ export default function HomeScreen() {
           The Database Tab holds a record of cars gathered by a webscraper to display. {"\n"}
           Used cars with perfect history means they have a clean history, one owner, and no accidents.  {"\n"}
           This can give a sense of deals out their and potentially good deals. {"\n"}
-          You can filter by price limits, makes and models, and US states. {"\n"}
+          You can filter by price and mileage limits, makes and models, and US states. {"\n"}
           Lastly, the cars are automatically sorted by their projected value as the purpose of this app is to find and identify deals. {"\n"}
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">The Future</ThemedText>
         <ThemedText>
-          Currently, I cannot deploy this application or utilize better methodologies like Google Maps API, as using web scrapers causes moral issues and potential API request charges. 
+          Currently, I cannot deploy this application or utilize better methodologies such as APIs, as using web scrapers causes moral issues and potential API request charges. 
           I had to abandon trying to extract the model style, accident and usage history, or owners, due to needing to scrape the individual listing which often didn't contain the needed information.  
           Additionally, I didn't have access to a free, robust deployment service to publish this application to the world.  
            {"\n\n"}
