@@ -181,13 +181,13 @@ const CarFilters: React.FC<FilterProps> = ({
                           onValueChange={() => toggleItem(make, selectedMakes, 'makes')}
                         />
                         <Text style={styles.checkboxLabel}>
-                          {(
+                          {
                             make
                               .replace(/_/g, ' ')
                               .split(' ')
                               .map(word=>word.charAt(0).toUpperCase() + word.slice(1))
                               .join(' ')
-                            )}
+                            }
                           </Text>
                       </View>
 
