@@ -199,7 +199,15 @@ const CarFilters: React.FC<FilterProps> = ({
                                 value={selectedModels.includes(model)}
                                 onValueChange={() => toggleItem(model, selectedModels, 'models')}
                               />
-                              <Text style={styles.checkboxLabel}>{model}</Text>
+                              <Text style={styles.checkboxLabel}>
+                              {
+                                model
+                                  .replace(/[_-]/g, ' ')
+                                  .split(' ')
+                                  .map(word=>word.charAt(0).toUpperCase() + word.slice(1))
+                                  .join(' ')
+                                }
+                              </Text>
                             </View>
                           ))}
                         </View>

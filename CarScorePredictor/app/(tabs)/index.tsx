@@ -16,6 +16,7 @@ export default function HomeScreen() {
         <Image
           source={require('@/assets/images/car2.png')}
           style={styles.reactLogo}
+          contentFit='cover'
         />
       }>
       <ThemedView style={styles.titleContainer}>
@@ -78,7 +79,6 @@ const styles = StyleSheet.create({
   reactLogo: {
     height: height * 0.3,
     width: width,
-    resizeMode: 'cover',
     bottom: 0,
     left: 0,
     position: 'absolute',
