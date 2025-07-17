@@ -49,7 +49,7 @@ export default function HomeScreen() {
           Additionally, I didn't have access to a free, robust deployment service to publish this application to the world.  
            {"\n\n"}
            Lastly, the car value score algorithm doesn't perform ideally due to the limitations of not knowing maintence costs or mileage expectancies over models and other information voided from the listings or the user. 
-           The neural network also tends to play it safe on the scores, making a lot of cars hover around the same score giving it an overall worse accuracy that what I wanted given a 1 point tolerance.
+           The neural network also tends to play it safe on the scores, making a lot of cars hover around the same score giving it an overall worse accuracy than what I wanted given a 1 point tolerance.
            {"\n\n"}
           If you have any questions or concerns email me: 
         </ThemedText>
