@@ -71,8 +71,9 @@ DROP TABLE IF EXISTS `Cars`;
 CREATE TABLE `Cars` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `title` text NOT NULL,
-    `make` text,
-    `model` text,
+    `make` text NOT NULL,
+    `model` text NOT NULL,
+    `modelTitle` text, 
     `condition` text,
     `year` text,
     `mileage` text,

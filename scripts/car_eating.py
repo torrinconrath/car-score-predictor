@@ -61,7 +61,7 @@ def get_random_headers():
         'Referer': BASE_URL
     }
 
-def scrape_car_listings(search_url, make):
+def scrape_car_listings(search_url, make, model):
     """Scrape car listings from search results"""
     cars_data = []
     seen_links = set()
@@ -109,18 +109,19 @@ def scrape_car_listings(search_url, make):
                 year = year_match.group(1) if year_match else None 
 
                 condition = None
-                model = None
+                modelTitle = None
 
                 if title and year:
                     parts = re.split(r'\b' + year + r'\b', title, maxsplit=1)
                     condition = parts[0].strip() if parts[0].strip() else None
-                    model = parts[1].strip() if len(parts) > 1 else None
+                    modelTitle = parts[1].strip() if len(parts) > 1 else None
 
                 car_info = {
                     'time': pd.Timestamp.now(),
                     'title': title,
                     'make': make.capitalize(),
                     'model': model,
+                    'modelTitle': modelTitle, 
                     'condition': condition,
                     'year': year,
                     'price': get_text(car, 'span.primary-price'),
@@ -236,7 +237,7 @@ def save_to_mysql(df, cursor, conn, table_name='Cars'):
     df['value'] = values
 
     columns = [
-        "title", "make", "model", "`condition`", "year", "mileage", 
+        "title", "make", "model", "modelTitle", "condition", "year", "mileage", 
         "price", "monthlyPayment", "dealer", "value", "region", "state", "link", "time"
     ]
     cols_str = ",".join(columns)
@@ -245,7 +246,7 @@ def save_to_mysql(df, cursor, conn, table_name='Cars'):
     insert_stmt = f"INSERT INTO {table_name} ({cols_str}) VALUES ({placeholders})"
 
     data = [tuple(row) for row in df[
-        ["title", "make", "model", "condition", "year", "mileage", 
+        ["title", "make", "model", "modelTitle", "condition", "year", "mileage", 
          "price", "monthlyPayment", "dealer", "value", "region", "state", "link", "time"]
     ].itertuples(index=False, name=None)]
 
@@ -307,7 +308,7 @@ def scrape_model(model):
 
         time.sleep(random.uniform(2, 4))
 
-        cars_df = scrape_car_listings(SEARCH_URL, MAKE)
+        cars_df = scrape_car_listings(SEARCH_URL, MAKE, MODEL)
 
         if not cars_df.empty:
             cars_df = add_predicted_values(cars_df)

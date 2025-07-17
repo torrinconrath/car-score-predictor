@@ -15,6 +15,7 @@ interface Car {
   id: number;
   title: string;
   model: string;
+  modelTitle: string;
   condition: string;
   year: string;
   mileage: string;
@@ -109,7 +110,7 @@ export default function DataScreen() {
     {item.model && (
       <ThemedView style={styles.detailsRow}>
         <ThemedText type="defaultSemiBold" style={{ fontSize: 14 }} >Model: </ThemedText>
-        <ThemedText type="default" style={{ fontSize: 14, flex: 1, textAlign: 'right' }} adjustsFontSizeToFit numberOfLines={2} minimumFontScale={0.75} >{item.model}</ThemedText>
+        <ThemedText type="default" style={{ fontSize: 14, flex: 1, textAlign: 'right' }} adjustsFontSizeToFit numberOfLines={2} minimumFontScale={0.75} >{item.modelTitle}</ThemedText>
       </ThemedView>
     )}
     
