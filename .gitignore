@@ -24,4 +24,4 @@ model/**/*.pth
 model/model_features.json
 
 # Ignore car_data.csv from car_scraper
-scripts/car_data.csv
+scripts/*.csv
