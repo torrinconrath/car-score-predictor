@@ -1,6 +1,6 @@
 ﻿# Car Score Predictor Mobile/Web Application
 
-This is a repository for my most recent mobile application that utilizes a full stack application with React Native, Neural Networks, text-driven LLM input, and web scraping.
+This is a repository for my most recent mobile application that utilizes a full stack application with React Native, Neural Networks, text-driven input, and web scraping.
 
 ## Setup
 
