@@ -8,7 +8,7 @@ This is a repository for my most recent mobile application that utilizes a full 
 
 - Then go into the env folder and edit the temp_config.py file to contain your database config, ip, and port, then rename it to config.py. You can also run export_config.py to send the config to the frontend now.
 
-- Next, go into the model folder, run cars.ipynb, then move all the .pkl files, best_car_model.pth, and model_features.json into the car_score_api folder.
+- Next, go into the model folder, run cars.ipynb to generate the model.
 
 - Lastly, go into the CarScorePredictor and run "npm install expo" to install the needed packages.
 
@@ -38,7 +38,7 @@ This is a repository for my most recent mobile application that utilizes a full 
 - Lastly, the cars are automatically sorted by their projected value as the purpose of this app is to find and identify deals.
 
 ## The Future
-- Currently, I cannot deploy this application or utilize better methodologies such as APIs, due to budget constraints. I cannot host the large models or imports on the server and don't want to risk request charges.
+- Currently, I cannot deploy this application or utilize better methodologies such as APIs, due to budget constraints and risks of request charges.
 
 - I had to abandon trying to extract the model style, accident and usage history, or owners, due to needing to scrape the individual listing which often didn't contain the needed information.
 

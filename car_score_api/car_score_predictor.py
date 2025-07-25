@@ -6,8 +6,14 @@ import pandas as pd
 import joblib
 import json
 import re
+import os
 from transformers import pipeline
 from torch import nn
+
+# Get base dir of current file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "model"))
+SCRIPT_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "scripts"))
 
 # Set Device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -35,21 +41,21 @@ class ImprovedMLP(nn.Module):
 class CarScorePredictor:
     def __init__(self):
         
-        self.input_scaler = joblib.load('scaler.pkl')
-        self.output_scaler = joblib.load('model_scaler.pkl')
+        self.input_scaler = joblib.load(os.path.join(MODEL_DIR, 'scaler.pkl'))
+        self.output_scaler = joblib.load(os.path.join(MODEL_DIR, 'model_scaler.pkl'))
 
         # Load model features
-        with open('model_features.json', 'r') as f:
+        with open(os.path.join(MODEL_DIR, 'model_features.json'), 'r') as f:
             self.model_features = json.load(f)
 
-        with open('all_make_model_keys.json', 'r') as f:
+        with open(os.path.join(SCRIPT_DIR, 'all_make_model_keys.json'), 'r') as f:
             self.model_slugs = json.load(f)
         
         self.model_types = [slug.replace('_', ' ').replace('-', ' ').title() for slug in self.model_slugs]
 
 
         # Get mean values for imputation from the training data
-        self.X_train_df = pd.read_pickle("X_train.pkl")
+        self.X_train_df = pd.read_pickle(os.path.join(MODEL_DIR,'X_train.pkl'))
         self.default_values = self.X_train_df.mean()
 
         # List of known categorical fields that were one-hot encoded
@@ -57,7 +63,7 @@ class CarScorePredictor:
         
         # Initialize the neural network
         self.model = ImprovedMLP(input_size=len(self.model_features))  
-        self.model.load_state_dict(torch.load('best_car_model.pth', weights_only=True))
+        self.model.load_state_dict(torch.load(os.path.join(MODEL_DIR, 'best_car_model.pth'), weights_only=True))
         self.model.to(device)
         self.model.eval()
         
