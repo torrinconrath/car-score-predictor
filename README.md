@@ -2,6 +2,9 @@
 
 This is a repository for my most recent mobile application that utilizes a full stack application with React Native, Neural Networks, text-driven input, and web scraping.
 
+THE NEXT UPDATE TO THE REPO WILL INCLUDE MY CODEBASE FOR THE DEPLOYMENT AND APP CREATION, [HERE IS THE CURRENT VERSION AS OF AUGUST 1] (https://drive.google.com/file/d/12Z6DHYQ7OjFu_Fex0gxq947GUKhT2dpA/view?usp=drive_link)!
+
+
 ## Setup
 
 - Firstly, set up a MySQL database
@@ -36,12 +39,5 @@ This is a repository for my most recent mobile application that utilizes a full 
 - This can give a sense of deals out their and potentially good deals.
 - You can filter by price and mileage limits, makes and models, and US states.
 - Lastly, the cars are automatically sorted by their projected value as the purpose of this app is to find and identify deals.
-
-## The Future
-- Currently, I cannot deploy this application or utilize better methodologies such as APIs, due to budget constraints and risks of request charges.
-
-- I had to abandon trying to extract the model style, accident and usage history, or owners, due to needing to scrape the individual listing which often didn't contain the needed information.
-
-- Lastly, the car value score algorithm doesn't perform ideally due to the limitations of not knowing maintence costs or mileage expectancies over models and other information voided from the listings or the user. The neural network also tends to play it safe on the scores, making a lot of cars hover around the same score giving it an overall worse accuracy. 
 
 If you have any questions or concerns email me: torrinconrath@gmail.com
