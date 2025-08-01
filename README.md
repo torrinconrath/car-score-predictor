@@ -2,8 +2,7 @@
 
 This is a repository for my most recent mobile application that utilizes a full stack application with React Native, Neural Networks, text-driven input, and web scraping.
 
-THE NEXT UPDATE TO THE REPO WILL INCLUDE MY CODEBASE FOR THE DEPLOYMENT AND APP CREATION, [HERE IS THE CURRENT VERSION AS OF AUGUST 1] 
-(https://drive.google.com/file/d/12Z6DHYQ7OjFu_Fex0gxq947GUKhT2dpA/view?usp=drive_link)!
+THE NEXT UPDATE TO THE REPO WILL INCLUDE MY CODEBASE FOR THE DEPLOYMENT AND APP CREATION, [HERE IS THE CURRENT VERSION AS OF AUGUST 1](https://drive.google.com/file/d/12Z6DHYQ7OjFu_Fex0gxq947GUKhT2dpA/view?usp=drive_link)
 
 
 ## Setup
