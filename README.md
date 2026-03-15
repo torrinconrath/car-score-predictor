@@ -128,6 +128,3 @@ This repo will be fully restructured. Planned changes include:
 
 ---
 
-## 📬 Contact
-
-Questions or feedback: [torrinconrath@gmail.com](mailto:torrinconrath@gmail.com)
