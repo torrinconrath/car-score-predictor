@@ -1,7 +1,5 @@
 # 🚗 Car Score Predictor
 
-> ⚠️ **This project is actively under development.** The current codebase is an early version and will be replaced with a fully restructured repo. See the [Planned Updates](#-planned-updates) section for what's coming.
-
 A full-stack mobile and web application that scores used car listings to help identify deals. It combines a neural network scoring model, an NLP-driven prediction interface, a web scraper that populates a live car database, and a React Native frontend — all wired together through a Python backend.
 
 The goal is to cut through the noise of used car shopping by giving every listing a data-driven value score, so you can immediately see which cars are actually worth your time.
@@ -101,9 +99,9 @@ python car_eating.py
 
 ---
 
-## 🔧 Planned Updates
+## 🔧 Future Work
 
-This repo will be fully restructured. Planned changes include:
+Some future work ideas include:
 
 - **Updated scoring algorithm** — improved model accuracy and scoring methodology
 - **Cross-platform release** — iOS, Android, and Web via React Native
